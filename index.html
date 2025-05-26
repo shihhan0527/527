@@ -1,15 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>Untitled</title>
-  <link rel="stylesheet" href="./style.css">
-
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
 <html lang="zh-Hant">
+  <link rel="stylesheet" href="css/style.css" />
+<script src="js/script.js"></script>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -36,8 +28,46 @@
   <script src="script.js"></script>
 </body>
 </html>
-<!-- partial -->
-  <script  src="./script.js"></script>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>客來挑戰：海陸拼拼樂 - 第二關</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="game-container">
+    <h1>第二關：單字中譯配對</h1>
+    <p>請將客語詞語拖拉到正確的中文翻譯上</p>
+    <div id="game-area">
+      <div class="drag-container">
+        <div class="draggable" draggable="true" id="term1">恁早</div>
+        <div class="draggable" draggable="true" id="term2">敗勢</div>
+        <div class="draggable" draggable="true" id="term3">朝晨頭</div>
+        <div class="draggable" draggable="true" id="term4">暗晡</div>
+        <div class="draggable" draggable="true" id="term5">當晝</div>
+        <div class="draggable" draggable="true" id="term6">食飽吂</div>
+        <div class="draggable" draggable="true" id="term7">食飽了嗎</div>
+        <div class="draggable" draggable="true" id="term8">有閒來寮</div>
+      </div>
+      <div class="drop-container">
+        <div class="droppable" data-answer="恁早">早安</div>
+        <div class="droppable" data-answer="敗勢">對不起</div>
+        <div class="droppable" data-answer="朝晨頭">早上</div>
+        <div class="droppable" data-answer="暗晡">晚上</div>
+        <div class="droppable" data-answer="當晝">中午</div>
+        <div class="droppable" data-answer="食飽吂">吃飽了嗎</div>
+        <div class="droppable" data-answer="食飽了嗎">吃飽了嗎</div>
+        <div class="droppable" data-answer="有閒來寮">有空再來</div>
+      </div>
+    </div>
+    <div id="feedback"></div>
+    <button id="submit-btn">提交答案</button>
+  </div>
 
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
