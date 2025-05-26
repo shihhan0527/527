@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Untitled</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>客來挑戰：海陸拼拼樂 - 第一關</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="game-container">
+    <h1>第一關：拼音對應挑戰</h1>
+    <div id="question-box">
+      <div id="question-text" class="big-text"></div>
+      <div id="options" class="options-grid"></div>
+    </div>
+    <div id="feedback" class="feedback"></div>
+    <div id="progress">進度：<span id="current">0</span>/5</div>
+    <button id="next-btn" style="display: none">下一題</button>
+  </div>
+
+  <audio id="correct-sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4f864e6c02.mp3?filename=correct-2-46134.mp3"></audio>
+  <audio id="wrong-sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6c55e90c47.mp3?filename=error-2-36058.mp3"></audio>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
