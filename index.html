@@ -1,104 +1,78 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
-  <link rel="stylesheet" href="css/style.css" />
-<script src="js/script.js"></script>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>客來挑戰：海陸拼拼樂 - 第一關</title>
+  <title>客來挑戰：海陸拼拼樂</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="game-container">
-    <h1>第一關：拼音對應挑戰</h1>
-    <div id="question-box">
-      <div id="question-text" class="big-text"></div>
-      <div id="options" class="options-grid"></div>
+
+  <div id="player-name-container" class="game-level" style="display: none;">
+    <div id="game-container"> <h1>歡迎來到客來挑戰！</h1>
+      <p>請輸入你的名字：</p>
+      <input type="text" id="player-name-input" placeholder="你的名字" />
+      <button id="start-game-btn">開始遊戲</button>
     </div>
-    <div id="feedback" class="feedback"></div>
-    <div id="progress">進度：<span id="current">0</span>/5</div>
-    <button id="next-btn" style="display: none">下一題</button>
+  </div>
+
+  <div id="level1-container" class="game-level" style="display: none;">
+    <div id="game-container"> <h1>第一關：拼音對應挑戰</h1>
+      <div id="question-box">
+        <div id="question-text" class="big-text"></div>
+        <div id="options" class="options-grid"></div>
+      </div>
+      <div id="feedback" class="feedback"></div>
+      <div id="progress">進度：<span id="current">0</span>/5</div>
+      <button id="next-btn-level1" style="display: none">下一題</button>
+    </div>
+  </div>
+
+  <div id="level2-container" class="game-level" style="display: none;">
+    <div id="game-container"> <h1>第二關：客語單字中譯配對</h1>
+      <p id="level2-instruction">請使用滑鼠先點擊題目，再點擊答案進行配對</p>
+      <div id="game-area">
+        <div class="drag-container">
+          </div>
+        <div class="drop-container">
+          </div>
+      </div>
+      <div id="level2-feedback" class="feedback"></div>
+      <div id="level2-progress">進度：<span id="level2-current-matches">0</span>/<span id="level2-total-terms">0</span></div>
+    </div>
+  </div>
+
+  <div id="level3-container" class="game-level" style="display: none;">
+    <div id="game-container"> <h1>第三關：客語句型聽力選擇題</h1>
+      <div id="question-box-level3"> <div class="audio-controls">
+          <button id="play-audio-btn" class="audio-btn"></button>
+          <div id="question-text-level3" class="hidden-text"></div>
+        </div>
+        <div id="options-level3" class="options-grid-level3">
+          </div>
+        <div id="reveal-options-btn-container">
+          <button id="reveal-options-btn" class="reveal-btn" style="display: none;">顯示客語詞彙</button>
+        </div>
+      </div>
+      <div id="feedback-level3" class="feedback"></div>
+      <div id="progress-level3">進度：<span id="current-level3">0</span>/5</div>
+      <button id="next-btn-level3" style="display: none">下一題</button>
+    </div>
+  </div>
+
+  <div id="game-over-container" class="game-level" style="display: none;">
+    <div id="game-container"> <h1>恭喜你完成所有挑戰！</h1>
+      <p id="final-score-message"></p>
+      <button id="restart-game-btn">重新開始</button>
+    </div>
   </div>
 
   <audio id="correct-sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4f864e6c02.mp3?filename=correct-2-46134.mp3"></audio>
   <audio id="wrong-sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6c55e90c47.mp3?filename=error-2-36058.mp3"></audio>
+  <audio id="question-audio"></audio>
 
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>客來挑戰：海陸拼拼樂 - 第二關</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div id="game-container">
-    <h1>第二關：客語單字中譯配對</h1>
-    <div id="level2-instruction">請使用滑鼠先點擊客語詞語，再點擊中文答案進行配對</div> <div id="level2-feedback" class="feedback"></div> <div id="level2-progress">已配對：<span id="level2-current-matches">0</span>/<span id="level2-total-terms">0</span></div> <div id="game-area">
-      <div class="drag-container">
-        <div class="draggable" id="term1">恁早</div>
-        <div class="draggable" id="term2">敗勢</div>
-        <div class="draggable" id="term3">朝晨頭</div>
-        <div class="draggable" id="term4">暗晡</div>
-        <div class="draggable" id="term5">當晝</div>
-        <div class="draggable" id="term6">食飽吂</div>
-        <div class="draggable" id="term7">承蒙你</div>
-        <div class="draggable" id="term8">有閒來寮</div>
-      </div>
-      <div class="drop-container">
-        <div class="droppable" data-answer="恁早">早安</div>
-        <div class="droppable" data-answer="敗勢">對不起</div>
-        <div class="droppable" data-answer="朝晨頭">早上</div>
-        <div class="droppable" data-answer="暗晡">晚上</div>
-        <div class="droppable" data-answer="當晝">中午</div>
-        <div class="droppable" data-answer="食飽吂">吃飽了嗎</div>
-        <div class="droppable" data-answer="承蒙你">謝謝</div>
-        <div class="droppable" data-answer="有閒來寮">有空再來</div>
-      </div>
-    </div>
-  </div>
-
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-  <script src="script.js"></script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>客來挑戰：海陸拼拼樂 - 第三關</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div id="game-container-level3">
-    <h1>第三關：客語句型聽力選擇題</h1>
-    <div id="question-box-level3">
-      <div class="audio-controls">
-        <button id="play-audio-btn" class="audio-btn"></button>
-        <div id="question-text-level3" class="hidden-text"></div> </div>
-      <div id="options-level3" class="options-grid-level3">
-        </div>
-      <div id="reveal-options-btn-container">
-        <button id="reveal-options-btn" class="reveal-btn" style="display: none;">顯示客語詞彙</button>
-      </div>
-    </div>
-    <div id="feedback-level3" class="feedback"></div>
-    <div id="progress-level3">進度：<span id="current-level3">0</span>/5</div>
-    <button id="next-btn-level3" style="display: none">下一題</button>
-  </div>
-
-  <audio id="correct-sound-level3" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4f864e6c02.mp3?filename=correct-2-46134.mp3"></audio>
-  <audio id="wrong-sound-level3" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6c55e90c47.mp3?filename=error-2-36058.mp3"></audio>
-  <audio id="question-audio"></audio> <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-  <script src="script.js"></script>
-</body>
-</html>
- 

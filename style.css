@@ -2,8 +2,15 @@ body {
   font-family: Arial, sans-serif;
   background-color: #e0f7fa; /* 藍色背景 */
   color: #00796b; /* 深藍色文字 */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* 確保內容至少佔據整個視窗高度 */
 }
 
+/* 通用遊戲容器樣式 - 應用於所有關卡的主框 */
 #game-container {
   text-align: center;
   margin: 20px auto;
@@ -11,41 +18,86 @@ body {
   border: 2px solid #00796b;
   border-radius: 10px;
   background-color: #ffffff;
+  max-width: 800px; /* 統一最大寬度 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加一點陰影 */
 }
 
-.big-text {
+/* 關卡顯示/隱藏控制 */
+.game-level {
+  display: none; /* 預設隱藏所有關卡，由 JS 控制顯示 */
+  width: 100%; /* 讓關卡容器佔滿父級 */
+  max-width: 800px; /* 統一最大寬度 */
+}
+
+/* 標題樣式 */
+h1 {
+  color: #2a72a5;
+  margin-bottom: 20px;
+}
+
+/* 玩家名稱輸入 */
+#player-name-container #game-container {
+  padding: 40px; /* 讓輸入框和按鈕有更多空間 */
+}
+#player-name-input {
+  padding: 10px;
+  font-size: 1.1rem;
+  border: 1px solid #00796b;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  width: 80%;
+  max-width: 300px;
+}
+#start-game-btn, #restart-game-btn {
+  font-size: 1.2rem;
+  padding: 12px 25px;
+  background-color: #679436;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+#start-game-btn:hover, #restart-game-btn:hover {
+  background-color: #5a822f;
+}
+
+
+/* --- 第一關特定樣式 --- */
+#level1-container .big-text {
   font-size: 2rem;
   margin: 20px 0;
+  color: #333; /* 確保文字顏色可見 */
 }
 
-.options-grid {
+#level1-container .options-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr; /* 原始的 3 欄佈局 */
   gap: 15px;
   margin-bottom: 20px;
 }
 
-.options-grid button {
+#level1-container .options-grid button {
   font-size: 1.5rem;
   padding: 12px;
   background-color: #bcd97d;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: background-color 0.2s;
 }
 
-.options-grid button:hover {
+#level1-container .options-grid button:hover {
   background-color: #a9c96c;
 }
 
-.feedback {
+#level1-container .feedback {
   font-size: 1.2rem;
   margin: 10px 0;
-  height: 2rem;
+  min-height: 2rem; /* 確保有足夠高度顯示訊息 */
 }
 
-#next-btn {
+#next-btn-level1 { /* 修改 ID 選擇器 */
   font-size: 1rem;
   padding: 10px 20px;
   background-color: #679436;
@@ -53,112 +105,125 @@ body {
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  margin-top: 20px;
+}
+#next-btn-level1:hover {
+  background-color: #5a822f;
 }
 
-h1 {
-  color: #2a72a5;
-}
 
-.drag-container,
-.drop-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 20px 0;
-}
-
-.draggable {
-  display: inline-block;
-  margin: 10px;
-  padding: 10px;
-  border: 2px solid #00796b;
-  border-radius: 5px;
-  background-color: #b2ebf2;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.droppable {
-  display: inline-block;
-  margin: 10px;
-  padding: 10px;
-  border: 2px solid #00796b;
-  border-radius: 5px;
-  background-color: #b2dfdb;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.selected {
-  background-color: #0288d1 !important; /* 藍色變暗 */
-  color: #fff;
-}
-
-.correct {
-  background-color: #c8e6c9; /* 綠色背景 */
-  border-color: #388e3c; /* 深綠色邊框 */
-}
-
-.incorrect {
-  background-color: #ffcdd2; /* 紅色背景 */
-  border-color: #d32f2f; /* 深紅色邊框 */
-}
-
-#submit-btn {
+/* --- 第二關特定樣式 --- */
+#level2-container #level2-instruction {
   font-size: 1.1rem;
-  padding: 10px 20px;
-  background-color: #2a72a5;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+  color: #555;
+  margin-bottom: 20px;
 }
 
-#feedback {
+#level2-container #game-area {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap; /* 允許在小螢幕上換行 */
+  gap: 20px; /* 增加間距 */
+}
+
+#level2-container .drag-container,
+#level2-container .drop-container {
+  display: flex;
+  flex-direction: column; /* 垂直排列 */
+  align-items: center; /* 水平居中 */
+  gap: 10px; /* 項目之間的間距 */
+  flex: 1; /* 讓容器彈性伸展 */
+  min-width: 250px; /* 確保至少有一定寬度 */
+}
+
+#level2-container .draggable {
+  width: 80%; /* 設置固定寬度 */
+  max-width: 200px; /* 最大寬度 */
+  padding: 12px;
+  border: 2px solid #00796b;
+  border-radius: 5px;
+  background-color: #b2ebf2; /* 淺藍色 */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s;
+  font-size: 1.2rem;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+#level2-container .draggable:hover {
+  background-color: #92dceb;
+  transform: translateY(-2px);
+}
+#level2-container .draggable.selected {
+  border-color: #ff5722; /* 橘色邊框 */
+  background-color: #ffe0b2; /* 淺橘色背景 */
+  transform: scale(1.02);
+}
+#level2-container .draggable.matched {
+  background-color: #e0e0e0;
+  color: #888;
+  border-color: #ccc;
+  cursor: default;
+  opacity: 0.7;
+}
+
+#level2-container .droppable {
+  width: 80%; /* 設置固定寬度 */
+  max-width: 200px; /* 最大寬度 */
+  padding: 12px;
+  border: 2px dashed #00796b; /* 虛線邊框 */
+  border-radius: 5px;
+  background-color: #b2dfdb; /* 淺綠色 */
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  font-size: 1.2rem;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+#level2-container .droppable:hover {
+  background-color: #92ccc9;
+}
+#level2-container .droppable.correct {
+  background-color: #66bb6a; /* 答對的綠色 */
+  border-color: #388e3c;
+  color: white;
+  cursor: default;
+}
+#level2-container .droppable.incorrect {
+  background-color: #ef5350; /* 答錯的紅色 */
+  border-color: #d32f2f;
+  color: white;
+}
+
+#level2-container #level2-feedback {
   font-size: 1.2rem;
   margin-top: 20px;
-  height: 2rem;
+  min-height: 2rem;
 }
 
-/* 當元素被拖動時的樣式 */
-.dragging {
-  opacity: 0.5;
+#level2-container #level2-progress {
+  font-size: 1rem;
+  margin-top: 15px;
+  color: #00796b;
 }
 
-/* 當 droppable 被拖放元素懸停時的樣式 */
-.dragover {
-  border: 2px dashed #4caf50;
-}
-/* ... (您現有的 CSS 樣式) ... */
 
-/* 第三關專屬樣式 */
-#game-container-level3 {
-  text-align: center;
-  margin: 20px auto;
-  padding: 20px;
-  border: 2px solid #00796b;
-  border-radius: 10px;
-  background-color: #ffffff;
-  max-width: 800px; /* 根據圖片調整寬度 */
-}
-
-#question-box-level3 {
+/* --- 第三關特定樣式 --- */
+/* 注意：此處 #question-box-level3 是 game-container 內部的結構，確保其樣式不會衝突 */
+#level3-container #question-box-level3 {
   margin-bottom: 20px;
-  border: 1px solid #ccc; /* 題目框的邊框 */
+  border: 1px solid #ccc;
   padding: 20px;
   border-radius: 8px;
   background-color: #f9f9f9;
 }
 
-.audio-controls {
+#level3-container .audio-controls {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
 }
 
-.audio-btn {
-  background-image: url('https://img.icons8.com/ios-filled/50/000000/speaker.png'); /* 播放音檔圖標 */
+#level3-container .audio-btn {
+  background-image: url('https://img.icons8.com/ios-filled/50/000000/speaker.png');
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -170,75 +235,74 @@ h1 {
   margin-right: 15px;
 }
 
-/* 暫停圖標（如果需要） */
-.audio-btn.playing {
-    background-image: url('https://img.icons8.com/ios-filled/50/000000/pause--v1.png'); /* 暫停音檔圖標 */
+#level3-container .audio-btn.playing {
+    background-image: url('https://img.icons8.com/ios-filled/50/000000/pause--v1.png');
 }
 
-#question-text-level3 {
+#level3-container #question-text-level3 {
   font-size: 1.5rem;
   font-weight: bold;
   color: #333;
 }
 
-.hidden-text {
-  visibility: hidden; /* 預設隱藏文本，佔據空間 */
+#level3-container .hidden-text {
+  visibility: hidden;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
 }
 
-.visible-text {
+#level3-container .visible-text {
   visibility: visible;
   opacity: 1;
 }
 
-.options-grid-level3 {
+#level3-container .options-grid-level3 {
   display: flex; /* 使用 flexbox */
-  justify-content: center; /* 水平居中 */
-  flex-wrap: wrap; /* 允許換行 */
-  gap: 20px; /* 按鈕間距 */
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
   margin-top: 20px;
 }
 
-.options-grid-level3 button {
+#level3-container .options-grid-level3 button {
   font-size: 1.3rem;
   padding: 15px 30px;
-  background-color: #bcd97d; /* 綠色按鈕 */
+  background-color: #bcd97d;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.2s, transform 0.1s;
-  min-width: 150px; /* 確保按鈕有一定寬度 */
+  min-width: 150px;
 }
 
-.options-grid-level3 button:hover {
+#level3-container .options-grid-level3 button:hover {
   background-color: #a9c96c;
   transform: translateY(-2px);
 }
 
-.options-grid-level3 button:disabled {
+#level3-container .options-grid-level3 button:disabled {
   background-color: #e0e0e0;
   cursor: not-allowed;
 }
 
-.options-grid-level3 .correct-answer {
-  background-color: #66bb6a; /* 答對的綠色 */
+#level3-container .options-grid-level3 .correct-answer {
+  background-color: #66bb6a;
   color: white;
 }
 
-.options-grid-level3 .wrong-answer {
-  background-color: #ef5350; /* 答錯的紅色 */
+#level3-container .options-grid-level3 .wrong-answer {
+  background-color: #ef5350;
   color: white;
 }
 
-#reveal-options-btn-container {
+#level3-container #reveal-options-btn-container {
   margin-top: 20px;
 }
 
-.reveal-btn {
+#level3-container .reveal-btn {
   font-size: 1rem;
   padding: 10px 20px;
-  background-color: #2a72a5; /* 藍色按鈕 */
+  background-color: #2a72a5;
   color: white;
   border: none;
   border-radius: 8px;
@@ -246,30 +310,23 @@ h1 {
   transition: background-color 0.2s;
 }
 
-.reveal-btn:hover {
+#level3-container .reveal-btn:hover {
   background-color: #1e5a87;
 }
 
-
-#feedback-level3 {
+#level3-container #feedback-level3 {
   font-size: 1.2rem;
   margin: 15px 0;
-  min-height: 2rem; /* 確保有足夠高度顯示訊息 */
+  min-height: 2rem;
 }
 
-#progress-level3 {
+#level3-container #progress-level3 {
   font-size: 1rem;
   margin-top: 20px;
   color: #00796b;
 }
 
-#next-btn-level3 {
+#level3-container #next-btn-level3 {
   font-size: 1rem;
   padding: 10px 20px;
-  background-color: #679436;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-top: 20px;
-}
+  background-color: #679436
