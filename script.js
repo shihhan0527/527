@@ -48,41 +48,43 @@ const totalPairsLevel2 = level2Pairs.length;
 // 第三關題目
 const questionsLevel3 = [
   {
-    audio: '客語第三關音檔/HA-01-002s.mp3',
+    audio: 'HA-01-002s.mp3', // 移除 '客語第三關音檔/'，直接指向根目錄
     questionText: '他才剛哭過，所以眼睛看起來會怎樣?',
     options: ['紅紅', '黃黃', '矇矇'],
     answer: '紅紅',
     correctChinese: '紅紅'
   },
   {
-    audio: '客語第三關音檔/HA-01-003s.mp3',
+    audio: 'HA-01-003s.mp3', // 移除 '客語第三關音檔/'
     questionText: '怎樣的天氣最有可能下大雨',
     options: ['出日頭', '發風搓', '落水毛仔'],
     answer: '發風搓',
     correctChinese: '刮颱風'
   },
   {
-    audio: '客語第三關音檔/HA-01-004s.mp3',
+    audio: 'HA-01-004s.mp3', // 移除 '客語第三關音檔/'
     questionText: '空氣毋好，在外背最好愛戴麼个？',
     options: ['禁指', '時錶', '封嘴仔'],
     answer: '封嘴仔',
     correctChinese: '口罩'
   },
   {
-    audio: '客語第三關音檔/HA-01-005s.mp3',
+    audio: 'HA-01-005s.mp3', // 移除 '客語第三關音檔/'
     questionText: '他的衣服長長短短的，還挺有趣的！出門去可能會怎樣？)',
     options: ['分人笑', '分人惜', '分人罵'],
     answer: '分人笑',
     correctChinese: '被人笑'
   },
   {
-    audio: '客語第三關音檔/HA-01-007s.mp3',
+    audio: 'HA-01-007s.mp3', // 移除 '客語第三關音檔/'
     questionText: '小弟弟整天吃飽睡、睡飽吃，什麼都不肯做，這句話意思是什麼)',
     options: ['當懶尸', '當儘採', '當生趣'],
     answer: '當懶尸',
     correctChinese: '很懶惰'
   }
 ];
+
+// ... (script.js 的其餘部分保持不變)
 let currentQLevel3 = 0; // 第三關當前題數
 let scoreLevel3 = 0;    // 第三關分數
 const totalQuestionsLevel3 = questionsLevel3.length;
