@@ -8,8 +8,9 @@
 </head>
 <body>
 
-  <div id="player-name-container" class="game-level" style="display: none;">
-    <div id="game-container"> <h1>歡迎來到客來挑戰！</h1>
+  <div id="player-name-container" class="game-level">
+    <div class="game-content-box">
+      <h1>歡迎來到客來挑戰！</h1>
       <p>請輸入你的名字：</p>
       <input type="text" id="player-name-input" placeholder="你的名字" />
       <button id="start-game-btn">開始遊戲</button>
@@ -17,7 +18,8 @@
   </div>
 
   <div id="level1-container" class="game-level" style="display: none;">
-    <div id="game-container"> <h1>第一關：拼音對應挑戰</h1>
+    <div class="game-content-box">
+      <h1>第一關：拼音對應挑戰</h1>
       <div id="question-box">
         <div id="question-text" class="big-text"></div>
         <div id="options" class="options-grid"></div>
@@ -29,27 +31,27 @@
   </div>
 
   <div id="level2-container" class="game-level" style="display: none;">
-    <div id="game-container"> <h1>第二關：客語單字中譯配對</h1>
+    <div class="game-content-box">
+      <h1>第二關：客語單字中譯配對</h1>
       <p id="level2-instruction">請使用滑鼠先點擊題目，再點擊答案進行配對</p>
       <div id="game-area">
-        <div class="drag-container">
-          </div>
-        <div class="drop-container">
-          </div>
+        <div class="drag-container"></div>
+        <div class="drop-container"></div>
       </div>
       <div id="level2-feedback" class="feedback"></div>
       <div id="level2-progress">進度：<span id="level2-current-matches">0</span>/<span id="level2-total-terms">0</span></div>
-    </div>
+      </div>
   </div>
 
   <div id="level3-container" class="game-level" style="display: none;">
-    <div id="game-container"> <h1>第三關：客語句型聽力選擇題</h1>
-      <div id="question-box-level3"> <div class="audio-controls">
+    <div class="game-content-box">
+      <h1>第三關：客語句型聽力選擇題</h1>
+      <div id="question-box-level3">
+        <div class="audio-controls">
           <button id="play-audio-btn" class="audio-btn"></button>
           <div id="question-text-level3" class="hidden-text"></div>
         </div>
-        <div id="options-level3" class="options-grid-level3">
-          </div>
+        <div id="options-level3" class="options-grid-level3"></div>
         <div id="reveal-options-btn-container">
           <button id="reveal-options-btn" class="reveal-btn" style="display: none;">顯示客語詞彙</button>
         </div>
@@ -61,14 +63,21 @@
   </div>
 
   <div id="game-over-container" class="game-level" style="display: none;">
-    <div id="game-container"> <h1>恭喜你完成所有挑戰！</h1>
+    <div class="game-content-box">
+      <h1>恭喜你完成所有挑戰！</h1>
       <p id="final-score-message"></p>
+      <p id="personal-accuracy"></p>
+
+      <h2>客來挑戰排行榜</h2>
+      <div id="leaderboard">
+        <p>載入中...</p>
+      </div>
       <button id="restart-game-btn">重新開始</button>
     </div>
   </div>
 
-  <audio id="correct-sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4f864e6c02.mp3?filename=correct-2-46134.mp3"></audio>
-  <audio id="wrong-sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6c55e90c47.mp3?filename=error-2-36058.mp3"></audio>
+  <audio id="correct-sound" src="audio/correct.mp3"></audio>
+  <audio id="wrong-sound" src="audio/wrong.mp3"></audio>
   <audio id="question-audio"></audio>
 
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
