@@ -398,4 +398,54 @@ h1 {
     font-size: 1.1rem;
     color: #555;
     padding: 20px;
+}/* ... (之前的所有 CSS 保持不變) ... */
+
+/* 新增：故事文本樣式 */
+.story-intro {
+    font-size: 1.5rem;
+    color: #2a72a5;
+    margin-bottom: 10px;
+    font-weight: bold;
 }
+
+.story-intro-accent {
+    font-size: 1.3rem;
+    color: #d32f2f; /* 客語部分可以稍微醒目 */
+    margin-bottom: 20px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.story-text {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    text-align: justify; /* 讓段落更整齊 */
+}
+
+.story-call-to-action {
+    font-size: 1.2rem;
+    color: #2a72a5;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.meme-highlight {
+    color: #2a72a5; /* 迷因詞彙高亮顏色 */
+    font-weight: bolder;
+    padding-bottom: 2px;
+}
+
+/* 如果有阿婆圖像，可以添加樣式 */
+/*
+阿婆圖.png {
+    width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    border: 3px solid #ff5722;
+    box-shadow: 0 0 10px rgba(255, 87, 34, 0.5);
+}
+*/

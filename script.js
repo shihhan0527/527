@@ -49,14 +49,14 @@ const totalPairsLevel2 = level2Pairs.length;
 const questionsLevel3 = [
   {
     audio: '客語第三關音檔/HA-01-002s.mp3',
-    questionText: '佢正噭啊過，所以目珠看起來仰般？',
+    questionText: '他才剛哭過，所以眼睛看起來會怎樣?',
     options: ['紅紅', '黃黃', '矇矇'],
     answer: '紅紅',
     correctChinese: '紅紅'
   },
   {
     audio: '客語第三關音檔/HA-01-003s.mp3',
-    questionText: '麼个天時最有可能會做（發）大水？',
+    questionText: '怎樣的天氣最有可能下大雨',
     options: ['出日頭', '發風搓', '落水毛仔'],
     answer: '發風搓',
     correctChinese: '刮颱風'
@@ -70,14 +70,14 @@ const questionsLevel3 = [
   },
   {
     audio: '客語第三關音檔/HA-01-005s.mp3',
-    questionText: '佢著个衫褲長長短短，還生趣哦！出門去可能會仰般？',
-    options: ['分人笑', '分人笑', '分人罵'],
+    questionText: '他的衣服長長短短的，還挺有趣的！出門去可能會怎樣？)',
+    options: ['分人笑', '分人惜', '分人罵'],
     answer: '分人笑',
     correctChinese: '被人笑'
   },
   {
     audio: '客語第三關音檔/HA-01-007s.mp3',
-    questionText: '阿德牯歸日仔食飽尞、尞飽食，麼个就毋肯做。意思係講佢仰般﹖',
+    questionText: '小弟弟整天吃飽睡、睡飽吃，什麼都不肯做，這句話意思是什麼)',
     options: ['當懶尸', '當儘採', '當生趣'],
     answer: '當懶尸',
     correctChinese: '很懶惰'
@@ -223,12 +223,12 @@ function checkAnswerLevel1(choice, answer) {
   buttons.forEach(btn => (btn.disabled = true)); // 禁用所有按鈕防止重複點擊
 
   if (choice === answer) {
-    feedbackBoxLevel1.textContent = "🎉 太棒了！你答對了！";
+    feedbackBoxLevel1.textContent = "🎉 係拉！就是這樣啦！";
     feedbackBoxLevel1.style.color = "green";
     scoreLevel1++;
     correctSound.play(); // 播放答對音效
   } else {
-    feedbackBoxLevel1.textContent = "😢 再接再厲，你可以的！";
+    feedbackBoxLevel1.textContent = "不可能-`д´-！怎麼會錯咧？只能下一題囉";
     feedbackBoxLevel1.style.color = "red";
     wrongSound.play(); // 播放答錯音效
   }
@@ -242,7 +242,7 @@ nextBtnLevel1.onclick = () => {
     loadQuestionLevel1(currentQLevel1);
   } else {
     let percent = Math.round((scoreLevel1 / totalQuestionsLevel1) * 100);
-    feedbackBoxLevel1.innerHTML = `🎊 完成第一關！你的得分是 ${scoreLevel1}/${totalQuestionsLevel1}（${percent}%）`;
+    feedbackBoxLevel1.innerHTML = `你是不是偷練？那麼厲害~你的第一關得分是 ${scoreLevel1}/${totalQuestionsLevel1}（${percent}%）`;
     feedbackBoxLevel1.style.color = "#00796b";
     nextBtnLevel1.style.display = "none";
 
@@ -342,7 +342,7 @@ function initLevel2() {
       this.style.pointerEvents = 'none'; // 禁用已匹配的中文答案
       selectedTerm.classList.remove('selected'); // 移除選取狀態
       selectedTerm = null; // 清空選取的詞語
-      feedbackLevel2.textContent = '配對成功！當慶(很厲害!)🎉';
+      feedbackLevel2.textContent = '🎉配對成功！當慶 ヾ(*´∇`)ﾉ🎉';
       feedbackLevel2.style.color = 'green';
       matchedCountLevel2++; // 增加匹配數
       updateLevel2Progress(); // 更新進度顯示
@@ -351,7 +351,7 @@ function initLevel2() {
       const allMatched = Array.from(dragContainerLevel2.querySelectorAll('.draggable'))
                              .every(term => term.classList.contains('matched'));
       if (allMatched) {
-        feedbackLevel2.innerHTML = '恭喜你！第二關全部配對成功！做得當好🎊';
+        feedbackLevel2.innerHTML = '恭喜你！第二關全部配對成功（⌒▽⌒）！做得當好🎊';
         // 儲存第二關完成狀態和匹配數量
         db.ref(`players/${playerName}/level2`).set({
             matchedCount: matchedCountLevel2,
@@ -366,7 +366,7 @@ function initLevel2() {
       }
     } else {
       this.classList.add('incorrect'); // 答錯的中文答案變紅
-      feedbackLevel2.textContent = '你答錯了！還可惜喔!😢';
+      feedbackLevel2.textContent = '慘了芭比Q了!還衰過喔ლ(｀∀´ლ)，再試試看吧';
       feedbackLevel2.style.color = 'red';
       wrongSound.play(); // 播放答錯音效
       setTimeout(() => {
@@ -382,6 +382,8 @@ function initLevel2() {
   updateLevel2Progress(); // 初始化時更新一次進度
 }
 
+
+// ... (之前的代碼保持不變，例如 Firebase 配置、關卡數據、DOM 元素獲取等) ...
 
 // --- 第三關邏輯 ---
 function loadQuestionLevel3(index) {
@@ -404,8 +406,11 @@ function loadQuestionLevel3(index) {
   nextBtnLevel3.style.display = 'none'; // 隱藏下一題按鈕
 
   // 打亂選項並創建按鈕
-  const shuffledOptions = shuffle([...q.options]); // 複製一份選項並打亂
-  shuffledOptions.forEach(option => {
+// 這裡進行修正：直接使用原始選項順序，不進行打亂
+  // 之前: const shuffledOptions = shuffle([...q.options]);
+  const orderedOptions = q.options; // 直接使用原始順序
+
+  orderedOptions.forEach(option => { // 將 shuffledOptions 改為 orderedOptions
     const btn = document.createElement('button');
     btn.textContent = option;
     btn.setAttribute('data-original-text', option); // 儲存原始文字以供判斷
@@ -445,7 +450,7 @@ function checkAnswerLevel3(choice, answer, correctChinese) {
   const clickedButton = Array.from(buttons).find(btn => btn.getAttribute('data-original-text') === choice);
 
   if (choice === answer) {
-    feedbackLevel3.innerHTML = '🎉 太棒了！你答對了！';
+    feedbackLevel3.innerHTML = '🎉 哇嗚！簡直『客語神人』(≧∇≦)/！';
     feedbackLevel3.style.color = 'green';
     scoreLevel3++;
     correctSound.play(); // 播放答對音效
@@ -459,7 +464,7 @@ function checkAnswerLevel3(choice, answer, correctChinese) {
     chineseMeaning.style.color = "#388e3c"; // 綠色
     clickedButton.appendChild(chineseMeaning);
   } else {
-    feedbackLevel3.innerHTML = `😢 再接再厲，你可以的！正確答案是「${answer}」`;
+    feedbackLevel3.innerHTML = ` 再接再厲，你可以的 (~￣▽￣)~！正確答案是「${answer}」`;
     feedbackLevel3.style.color = 'red';
     wrongSound.play(); // 播放答錯音效
     clickedButton.classList.add('wrong-answer');
@@ -486,7 +491,7 @@ nextBtnLevel3.onclick = () => {
     loadQuestionLevel3(currentQLevel3);
   } else {
     let percent = Math.round((scoreLevel3 / totalQuestionsLevel3) * 100);
-    feedbackLevel3.innerHTML = `🎊 完成第三關！你的得分是 ${scoreLevel3}/${totalQuestionsLevel3}（${percent}%）`;
+    feedbackLevel3.innerHTML = `🎊 完成第三關(╯✧∇✧)╯！你的得分是 ${scoreLevel3}/${totalQuestionsLevel3}（${percent}%）`;
     feedbackLevel3.style.color = "#00796b";
     nextBtnLevel3.style.display = "none";
 
@@ -512,8 +517,8 @@ async function displayFinalScore() {
     let totalPossible = totalQuestionsLevel1 + totalPairsLevel2 + totalQuestionsLevel3;
     let overallAccuracy = (totalCorrect / totalPossible * 100).toFixed(2);
 
-    finalScoreMessage.textContent = `${playerName}，你真棒！你的總得分是：${totalCorrect}/${totalPossible}！`;
-    personalAccuracyDisplay.textContent = `你的總答對率是：${overallAccuracy}%`;
+    finalScoreMessage.textContent = `${playerName}有點厲害喔~你的總得分是：${totalCorrect}/${totalPossible}！`;
+    personalAccuracyDisplay.textContent = `你的總答對率是(￣▽￣)~：${overallAccuracy}%`;
 
     // 更新當前玩家的總分和最近完成時間到 Firebase
     db.ref(`players/${playerName}`).update({
@@ -585,3 +590,47 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     showLevel(0); // 顯示玩家名稱輸入介面
 });
+// ... (之前的 Firebase 配置、關卡數據、DOM 元素獲取等保持不變) ...
+
+/// --- 玩家名稱和遊戲開始 ---
+startGameBtn.onclick = () => {
+  playerName = playerNameInput.value.trim();
+  if (playerName === "") {
+    playerName = "勇者少年仔"; // 如果玩家沒有輸入，預設為故事中的「勇者少年仔」
+  }
+  // 將玩家名字存儲到 localStorage，以便下次訪問時自動填入
+  localStorage.setItem('playerName', playerName);
+  showLevel(1); // 顯示第一關
+  // 更新Firebase中的玩家狀態，標記開始遊戲
+  db.ref(`players/${playerName}`).update({
+      lastPlayed: firebase.database.ServerValue.TIMESTAMP,
+      status: "started"
+  });
+};
+restartGameBtn.onclick = () => {
+    // 重置所有關卡分數和進度
+    currentQLevel1 = 0;
+    scoreLevel1 = 0;
+    matchedCountLevel2 = 0;
+    currentQLevel3 = 0;
+    scoreLevel3 = 0;
+    playerNameInput.value = ''; // 清空玩家名字輸入框
+    // 重設提示為「你的勇者名字」
+    playerNameInput.placeholder = "你的勇者名字";
+    showLevel(0); // 返回玩家名稱輸入介面
+};
+
+// ... (第一關、第二關、第三關、遊戲結束邏輯保持不變) ...
+
+// --- 初始載入：顯示玩家名稱輸入介面 ---
+document.addEventListener('DOMContentLoaded', () => {
+    const savedPlayerName = localStorage.getItem('playerName');
+    if (savedPlayerName) {
+        playerNameInput.value = savedPlayerName; // 如果有儲存的名字，自動填入
+    }
+    // 設置 placeholder 文本
+    playerNameInput.placeholder = "你的勇者名字";
+    showLevel(0); // 顯示玩家名稱輸入介面
+});
+
+ 
